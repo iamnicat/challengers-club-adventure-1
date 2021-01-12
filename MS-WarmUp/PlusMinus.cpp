@@ -4,37 +4,39 @@ using namespace std;
 
 vector<string> split_string(string);
 
-// Complete the aVeryBigSum function below.
-long aVeryBigSum(vector<long> ar) {
-    return std::accumulate(ar.begin(), ar.end(), 0L);
+// Complete the plusMinus function below.
+void plusMinus(vector<int> const& arr) {
+    double neg{}, zero{}, pos{};
+    for (auto const elm : arr)
+    {
+        neg += elm < 0;
+        zero += elm == 0;
+        pos += elm > 0;
+    }
+    int const sz = arr.size();
+    printf("%f\n%f\n%f\n", pos/sz, neg/sz, zero/sz);
 }
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
-
-    int ar_count;
-    cin >> ar_count;
+    int n;
+    cin >> n;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    string ar_temp_temp;
-    getline(cin, ar_temp_temp);
+    string arr_temp_temp;
+    getline(cin, arr_temp_temp);
 
-    vector<string> ar_temp = split_string(ar_temp_temp);
+    vector<string> arr_temp = split_string(arr_temp_temp);
 
-    vector<long> ar(ar_count);
+    vector<int> arr(n);
 
-    for (int i = 0; i < ar_count; i++) {
-        long ar_item = stol(ar_temp[i]);
+    for (int i = 0; i < n; i++) {
+        int arr_item = stoi(arr_temp[i]);
 
-        ar[i] = ar_item;
+        arr[i] = arr_item;
     }
 
-    long result = aVeryBigSum(ar);
-
-    fout << result << "\n";
-
-    fout.close();
+    plusMinus(arr);
 
     return 0;
 }

@@ -4,37 +4,29 @@ using namespace std;
 
 vector<string> split_string(string);
 
-// Complete the aVeryBigSum function below.
-long aVeryBigSum(vector<long> ar) {
-    return std::accumulate(ar.begin(), ar.end(), 0L);
+// Complete the miniMaxSum function below.
+void miniMaxSum(vector<int> const& arr) {
+    auto const sum = accumulate(arr.cbegin(), arr.cend(), 0LL);
+    auto const [min, max] = minmax_element(arr.cbegin(), arr.cend());
+    printf("%lld %lld\n", sum - *max, sum - *min);
 }
 
 int main()
 {
-    ofstream fout(getenv("OUTPUT_PATH"));
+    string arr_temp_temp;
+    getline(cin, arr_temp_temp);
 
-    int ar_count;
-    cin >> ar_count;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    vector<string> arr_temp = split_string(arr_temp_temp);
 
-    string ar_temp_temp;
-    getline(cin, ar_temp_temp);
+    vector<int> arr(5);
 
-    vector<string> ar_temp = split_string(ar_temp_temp);
+    for (int i = 0; i < 5; i++) {
+        int arr_item = stoi(arr_temp[i]);
 
-    vector<long> ar(ar_count);
-
-    for (int i = 0; i < ar_count; i++) {
-        long ar_item = stol(ar_temp[i]);
-
-        ar[i] = ar_item;
+        arr[i] = arr_item;
     }
 
-    long result = aVeryBigSum(ar);
-
-    fout << result << "\n";
-
-    fout.close();
+    miniMaxSum(arr);
 
     return 0;
 }
