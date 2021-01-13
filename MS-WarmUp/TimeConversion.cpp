@@ -2,29 +2,25 @@
 
 using namespace std;
 
-string timeConversion(string const& time) {
-   string hour = time.substr(0, 2); // hour is the only thing to convert
-   string const id = time.substr(8, 2);   // AM/PM
-   int nHour = stoi(hour);
+string timeConversion(string time) {
+  if (time[0]=='1' && time[1]=='2') // 12 AM to 12 PM and vice versa
+      time[8] = "PA"[time[8]=='P']; 
+      
+  if (time[8] == 'P') {
+    if (time[1] < '8') {
+      time[1] += 2;
+      time[0] += 1; 
+    } else {
+      time[1] -= 8;
+      time[0] += 2;
+    }
+  }
+  
+  if (time[0]=='2' && time[1]=='4') // 24 to 00
+    time[0]=time[1]='0';
 
-   if( id == "PM" )
-   {
-       if(nHour != 12)
-           nHour += 12;
-
-       hour = to_string(nHour);
-   }
-   else
-   {
-       if( nHour == 12 )
-           hour = "00";
-       else if( nHour < 10 )
-           hour = "0" + to_string(nHour); // zero padding
-       else
-           hour = to_string(nHour);
-   }
-
-   return hour + time.substr(2, 6);
+  time.resize(time.size()-2); // remove AM/PM
+  return time;
 }
 
 int main()
