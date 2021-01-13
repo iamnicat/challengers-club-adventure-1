@@ -54,7 +54,7 @@ public:
             carry /= 10;
         }
         std::reverse(res.begin(), res.end());
-        mData = res;
+        mData = std::move(res);
         return *this;
     }
 
@@ -78,7 +78,7 @@ public:
             res.resize(res.size() + (bottom - other_int.crbegin()), '0');
             to_add.push_back(std::move(res));
         }
-        mData = "0";
+        mData.clear();
         for (auto& str : to_add) {
             (*this) += UBigInteger(std::move(str));
         }
