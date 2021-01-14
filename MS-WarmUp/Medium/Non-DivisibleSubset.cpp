@@ -1,4 +1,3 @@
-#define NDEBUG
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -18,22 +17,12 @@ vector<string> split(const string &);
 
 
 
-#ifndef NDEBUG
-#define LOG(x) std::cout << (x) << '\n'
-#else
-#define LOG(x) ((void)0)
-#endif
-
-
 int nonDivisibleSubset(int const& k, std::vector<int> const& s) {
-    LOG(s);
     // Hash map of { reminder : count }
     std::unordered_map<int, int> sets;
     sets.reserve(k);
     for (auto& elm : s)
         ++sets[elm % k];
-
-    LOG(sets);
 
     // reminders of 0 and k/2 invalidate each ohter, so we only take 1 of each.
     int zero_and_half = 0;
@@ -49,8 +38,6 @@ int nonDivisibleSubset(int const& k, std::vector<int> const& s) {
             sets.erase(it);
         }
     }
-
-    LOG(sets);
 
     using Pair = decltype(sets)::value_type;
 
@@ -69,10 +56,8 @@ int nonDivisibleSubset(int const& k, std::vector<int> const& s) {
     // no element invalidates each other
     while (!sets.empty()) {
         auto const mx = std::max_element(sets.begin(), sets.end(), cmp);
-        LOG(*mx);
         if (!invalee_cnt(*mx)) break;
         sets.erase(mx);
-        LOG(sets);
     }
 
     // Add all the remaing counts to zero_and_half
