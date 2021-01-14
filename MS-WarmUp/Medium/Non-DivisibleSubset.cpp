@@ -1,3 +1,4 @@
+#define NDEBUG
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -15,7 +16,7 @@ vector<string> split(const string &);
  *  2. INTEGER_ARRAY s
  */
 
-#define NDEBUG
+
 
 #ifndef NDEBUG
 #define LOG(x) std::cout << (x) << '\n'
