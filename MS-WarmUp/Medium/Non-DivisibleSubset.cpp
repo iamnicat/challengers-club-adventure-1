@@ -29,7 +29,7 @@ int nonDivisibleSubset(int const& k, std::vector<int> const& s) {
     LOG(s);
     // Hash map of { reminder : count }
     std::unordered_map<int, int> sets;
-    sets.reserve(s.size());
+    sets.reserve(k);
     for (auto& elm : s)
         ++sets[elm % k];
 
